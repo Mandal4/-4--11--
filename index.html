@@ -1,4 +1,372 @@
-!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>11-р ангийн эцэг эхийн уулзалт - Урилга</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1e3c72;
+            --secondary: #2a5298;
+            --accent: #ff7e5f;
+            --text-dark: #2c3e50;
+            --text-light: #ecf0f1;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        .slider-container {
+            position: relative;
+            width: 100%;
+            max-width: 450px;
+            height: 85vh;
+            max-height: 850px;
+            min-height: 620px;
+            background: var(--white);
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+            transform: translateX(50px);
+            display: flex;
+            flex-direction: column;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .slide.active {
+            opacity: 1;
+            transform: translateX(0);
+            pointer-events: auto;
+            z-index: 2;
+        }
+
+        /* Slide Specific Styles */
+        .slide-content {
+            padding: 30px 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        /* Slide 1: Logo & Title (New Page with logo.png) */
+        .logo-img {
+            width: 110px;
+            height: 110px;
+            object-fit: contain;
+            margin-bottom: 15px;
+            border-radius: 50%;
+            background: white;
+            padding: 5px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        /* Slide 2: Welcome with background image (542833691...) */
+        .slide-bg-image-2 {
+            background-image: url('542833691_2874839172702000_3591516506040930727_n.jpg');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            color: var(--white);
+        }
+
+        .slide-bg-image-2::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1;
+        }
+
+        .slide-bg-image-2 .slide-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .welcome-icon {
+            font-size: 50px;
+            color: var(--accent);
+            margin-bottom: 15px;
+            animation: bounce 2s infinite;
+        }
+
+        .slide h1 {
+            font-size: 26px;
+            margin-bottom: 12px;
+            line-height: 1.3;
+        }
+
+        .slide h2.subtitle {
+            font-size: 18px;
+            color: var(--accent);
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .slide p {
+            font-size: 15px;
+            opacity: 0.95;
+            line-height: 1.5;
+        }
+
+        /* Slide 3 & 4: Info with Images */
+        .image-header {
+            width: 100%;
+            height: 42%;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        .image-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 40px;
+            background: linear-gradient(to bottom, transparent, var(--white));
+        }
+        .info-body {
+            padding: 20px 25px 30px;
+            background: var(--white);
+            flex-grow: 1;
+            text-align: center;
+            color: var(--text-dark);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .info-body h2 {
+            color: var(--primary);
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+        .details-box {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border-left: 5px solid var(--accent);
+        }
+        .details-box div {
+            margin: 8px 0;
+            font-size: 15px;
+            font-weight: 600;
+        }
+        .details-box i {
+            color: var(--secondary);
+            margin-right: 8px;
+            width: 20px;
+        }
+
+        /* Slide Gradient */
+        .bg-gradient {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: var(--white);
+        }
+
+        /* Navigation Controls */
+        .controls {
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 25px;
+            z-index: 10;
+        }
+
+        .dots {
+            display: flex;
+            gap: 6px;
+        }
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(150, 150, 150, 0.5);
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .dot.active {
+            background: var(--accent);
+            transform: scale(1.3);
+        }
+
+        .nav-btn {
+            background: var(--accent);
+            color: var(--white);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(255, 126, 95, 0.4);
+            transition: 0.3s;
+        }
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 126, 95, 0.6);
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-15px); }
+            60% { transform: translateY(-7px); }
+        }
+
+        .cta-box {
+            background: rgba(255, 126, 95, 0.1);
+            padding: 15px;
+            border-radius: 12px;
+            border: 2px dashed var(--accent);
+            margin-top: 15px;
+            color: var(--primary);
+            font-weight: bold;
+            font-size: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="slider-container">
+        
+        <!-- Slide 1: New First Page with logo.png & 11th Grade Title -->
+        <div class="slide bg-gradient active" id="slide1">
+            <div class="slide-content">
+                <img src="logo.png" alt="Сургуулийн лого" class="logo-img">
+                <h2 class="subtitle">Сэлэнгэ аймаг Мандал сум 4-р сургууль</h2>
+                <h1>11-р ангийн эцэг эх, асран хамгаалагчийн уулзалт</h1>
+                <p>Хүүхдийнхээ ирээдүйн төлөө хамтдаа алхацгаая.</p>
+            </div>
+        </div>
+
+        <!-- Slide 2: Welcome with 542833691 image background -->
+        <div class="slide slide-bg-image-2" id="slide2">
+            <div class="slide-content">
+                <i class="fas fa-handshake welcome-icon"></i>
+                <h1>Хүүхдийнхээ төлөө<br>ХАМТДАА</h1>
+                <p>Эрхэм эцэг эх, асран хамгаалагч та бүхнийг 11-р ангийн нэгдсэн хуралд хүндэтгэн урьж байна.</p>
+            </div>
+        </div>
+
+        <!-- Slide 3: Information with 548763890 image header -->
+        <div class="slide" id="slide3">
+            <div class="image-header" style="background-image: url('548763890_809940934829868_612864519031044213_n.jpg');"></div>
+            <div class="info-body">
+                <h2>Хэзээ, Хаана?</h2>
+                <div class="details-box" style="text-align: left;">
+                    <div><i class="far fa-calendar-alt"></i> 2026.10.06 (Мягмар)</div>
+                    <div><i class="far fa-clock"></i> 18:00 цагаас</div>
+                    <div><i class="fas fa-map-marker-alt"></i> Сургуулийн урлаг заал</div>
+                </div>
+                <p style="font-size: 13px; color: #7f8c8d; margin-top: 10px;">
+                    Таныг цагтаа хүрэлцэн ирнэ гэдэгт итгэлтэй байна.
+                </p>
+            </div>
+        </div>
+
+        <!-- Slide 4: Call to Action -->
+        <div class="slide bg-gradient" id="slide4">
+            <div class="slide-content">
+                <i class="fas fa-users welcome-icon" style="color: #fff; font-size: 45px;"></i>
+                <h2>Таны оролцоо<br>хамгийн чухал!</h2>
+                <p style="margin-top: 10px;">Манай сургууль алсын хараандаа тулгуурласан шинэлэг менежментийг хэрэгжүүлж байна. Бид тантай нээлттэй ярилцахад бэлэн байна.</p>
+                
+                <div class="cta-box">
+                    Хуралдаа заавал хүрэлцэн ирээрэй!
+                </div>
+            </div>
+        </div>
+
+        <!-- Controls -->
+        <div class="controls">
+            <div class="dots">
+                <div class="dot active" onclick="goToSlide(0)"></div>
+                <div class="dot" onclick="goToSlide(1)"></div>
+                <div class="dot" onclick="goToSlide(2)"></div>
+                <div class="dot" onclick="goToSlide(3)"></div>
+            </div>
+            <button class="nav-btn" id="nextBtn" onclick="nextSlide()">Цааш нь ➔</button>
+        </div>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.dot');
+        const nextBtn = document.getElementById('nextBtn');
+
+        function showSlide(index) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+
+            slides[index].classList.add('active');
+            dots[index].classList.add('active');
+
+            if (index === slides.length - 1) {
+                nextBtn.innerHTML = "Дуусгах";
+                nextBtn.style.background = "#2ecc71";
+                nextBtn.style.boxShadow = "0 5px 15px rgba(46, 204, 113, 0.4)";
+            } else {
+                nextBtn.innerHTML = "Цааш нь ➔";
+                nextBtn.style.background = "var(--accent)";
+                nextBtn.style.boxShadow = "0 5px 15px rgba(255, 126, 95, 0.4)";
+            }
+        }
+
+        function nextSlide() {
+            if (currentSlide < slides.length - 1) {
+                currentSlide++;
+                showSlide(currentSlide);
+            } else {
+                currentSlide = 0;
+                showSlide(currentSlide);
+            }
+        }
+
+        function goToSlide(index) {
+            currentSlide = index;
+            showSlide(currentSlide);
+        }
+    </script>
+</body>
+</html>!DOCTYPE html>
 <html lang="mn">
 <head>
     <meta charset="UTF-8">
