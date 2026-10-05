@@ -34,7 +34,7 @@
         .slider-container {
             position: relative;
             width: 100%;
-            max-width: 450px; /* Mobile-first story like size */
+            max-width: 450px;
             height: 80vh;
             max-height: 800px;
             min-height: 600px;
@@ -77,25 +77,47 @@
             text-align: center;
         }
 
-        /* Slide 1: Welcome */
-        .bg-gradient {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+        /* Slide 1: Welcome with background image */
+        .slide-bg-image {
+            background-image: url('553296844_575213172285382_4600941409163395058_n.jpg');
+            background-size: cover;
+            background-position: center;
+            position: relative;
             color: var(--white);
         }
+
+        .slide-bg-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1;
+        }
+
+        .slide-bg-image .slide-content {
+            position: relative;
+            z-index: 2;
+        }
+
         .welcome-icon {
             font-size: 60px;
             color: var(--accent);
             margin-bottom: 20px;
             animation: bounce 2s infinite;
         }
+
         .slide h1 {
             font-size: 28px;
             margin-bottom: 15px;
             line-height: 1.3;
         }
+
         .slide p {
             font-size: 16px;
-            opacity: 0.9;
+            opacity: 0.95;
             line-height: 1.6;
         }
 
@@ -145,6 +167,12 @@
             color: var(--secondary);
             margin-right: 10px;
             width: 20px;
+        }
+
+        /* Slide 4: Gradient */
+        .bg-gradient {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: var(--white);
         }
 
         /* Navigation Controls */
@@ -215,8 +243,8 @@
 
     <div class="slider-container">
         
-        <!-- Slide 1: Welcome -->
-        <div class="slide bg-gradient active" id="slide1">
+        <!-- Slide 1: Welcome with your image as background -->
+        <div class="slide slide-bg-image active" id="slide1">
             <div class="slide-content">
                 <i class="fas fa-handshake welcome-icon"></i>
                 <h1>Хүүхдийнхээ төлөө<br>ХАМТДАА</h1>
@@ -226,7 +254,6 @@
 
         <!-- Slide 2: Information with Image -->
         <div class="slide" id="slide2">
-            <!-- Сургууль/Боловсролын сэдэвтэй зураг -->
             <div class="image-header" style="background-image: url('https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=800&q=80');"></div>
             <div class="info-body">
                 <h2>Хэзээ, Хаана?</h2>
@@ -243,7 +270,6 @@
 
         <!-- Slide 3: Vision & Management -->
         <div class="slide" id="slide3">
-            <!-- Эцэг эх, багш нарын уулзалтын сэдэвтэй зураг -->
             <div class="image-header" style="background-image: url('https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=800&q=80');"></div>
             <div class="info-body">
                 <h2>Шинэ зорилго, менежмент</h2>
@@ -285,15 +311,12 @@
         const nextBtn = document.getElementById('nextBtn');
 
         function showSlide(index) {
-            // Remove active classes
             slides.forEach(slide => slide.classList.remove('active'));
             dots.forEach(dot => dot.classList.remove('active'));
 
-            // Set new active slide
             slides[index].classList.add('active');
             dots[index].classList.add('active');
 
-            // Update button text on last slide
             if (index === slides.length - 1) {
                 nextBtn.innerHTML = "Дуусгах";
                 nextBtn.style.background = "#2ecc71";
@@ -310,7 +333,6 @@
                 currentSlide++;
                 showSlide(currentSlide);
             } else {
-                // Optional: loop back to start or show a confirmation alert
                 currentSlide = 0;
                 showSlide(currentSlide);
             }
@@ -320,11 +342,6 @@
             currentSlide = index;
             showSlide(currentSlide);
         }
-
-        // Optional: Auto slide every 5 seconds (uncomment if needed)
-        // setInterval(() => {
-        //     if(currentSlide < slides.length - 1) nextSlide();
-        // }, 5000);
     </script>
 </body>
 </html>
