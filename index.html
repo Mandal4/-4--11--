@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Сургуулийн нэгдсэн хурал - Урилга</title>
+    <title>11-р ангийн эцэг эхийн уулзалт - Урилга</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         :root {
@@ -35,9 +35,9 @@
             position: relative;
             width: 100%;
             max-width: 450px;
-            height: 80vh;
-            max-height: 800px;
-            min-height: 600px;
+            height: 85vh;
+            max-height: 850px;
+            min-height: 620px;
             background: var(--white);
             border-radius: 20px;
             box-shadow: 0 20px 50px rgba(0,0,0,0.2);
@@ -68,7 +68,7 @@
 
         /* Slide Specific Styles */
         .slide-content {
-            padding: 40px 30px;
+            padding: 30px 25px;
             flex-grow: 1;
             display: flex;
             flex-direction: column;
@@ -77,7 +77,19 @@
             text-align: center;
         }
 
-        /* Slide 1: Welcome with background image */
+        /* Slide 1: Logo & Title (New Page) */
+        .logo-img {
+            width: 110px;
+            height: 110px;
+            object-fit: contain;
+            margin-bottom: 15px;
+            border-radius: 50%;
+            background: white;
+            padding: 5px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        /* Slide 2: Welcome with background image */
         .slide-bg-image {
             background-image: url('553296844_575213172285382_4600941409163395058_n.jpg');
             background-size: cover;
@@ -103,28 +115,35 @@
         }
 
         .welcome-icon {
-            font-size: 60px;
+            font-size: 50px;
             color: var(--accent);
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             animation: bounce 2s infinite;
         }
 
         .slide h1 {
-            font-size: 28px;
-            margin-bottom: 15px;
+            font-size: 26px;
+            margin-bottom: 12px;
             line-height: 1.3;
         }
 
-        .slide p {
-            font-size: 16px;
-            opacity: 0.95;
-            line-height: 1.6;
+        .slide h2.subtitle {
+            font-size: 18px;
+            color: var(--accent);
+            margin-bottom: 15px;
+            font-weight: 700;
         }
 
-        /* Slide 2 & 3: Info with Images */
+        .slide p {
+            font-size: 15px;
+            opacity: 0.95;
+            line-height: 1.5;
+        }
+
+        /* Slide 3 & 4: Info with Images */
         .image-header {
             width: 100%;
-            height: 45%;
+            height: 42%;
             background-size: cover;
             background-position: center;
             position: relative;
@@ -135,41 +154,44 @@
             bottom: 0;
             left: 0;
             width: 100%;
-            height: 50px;
+            height: 40px;
             background: linear-gradient(to bottom, transparent, var(--white));
         }
         .info-body {
-            padding: 30px;
+            padding: 20px 25px 30px;
             background: var(--white);
             flex-grow: 1;
             text-align: center;
             color: var(--text-dark);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
         .info-body h2 {
             color: var(--primary);
-            font-size: 22px;
-            margin-bottom: 20px;
+            font-size: 20px;
+            margin-bottom: 15px;
         }
         .details-box {
             background: #f8f9fa;
-            border-radius: 15px;
-            padding: 20px;
-            margin-bottom: 15px;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 10px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
             border-left: 5px solid var(--accent);
         }
         .details-box div {
-            margin: 10px 0;
-            font-size: 16px;
+            margin: 8px 0;
+            font-size: 15px;
             font-weight: 600;
         }
         .details-box i {
             color: var(--secondary);
-            margin-right: 10px;
+            margin-right: 8px;
             width: 20px;
         }
 
-        /* Slide 4: Gradient */
+        /* Slide 5: Gradient */
         .bg-gradient {
             background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             color: var(--white);
@@ -178,23 +200,23 @@
         /* Navigation Controls */
         .controls {
             position: absolute;
-            bottom: 30px;
+            bottom: 20px;
             left: 0;
             width: 100%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0 30px;
+            padding: 0 25px;
             z-index: 10;
         }
 
         .dots {
             display: flex;
-            gap: 8px;
+            gap: 6px;
         }
         .dot {
-            width: 10px;
-            height: 10px;
+            width: 8px;
+            height: 8px;
             border-radius: 50%;
             background: rgba(150, 150, 150, 0.5);
             cursor: pointer;
@@ -209,9 +231,9 @@
             background: var(--accent);
             color: var(--white);
             border: none;
-            padding: 12px 25px;
+            padding: 10px 20px;
             border-radius: 25px;
-            font-size: 16px;
+            font-size: 15px;
             font-weight: bold;
             cursor: pointer;
             box-shadow: 0 5px 15px rgba(255, 126, 95, 0.4);
@@ -224,18 +246,19 @@
 
         @keyframes bounce {
             0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-            40% { transform: translateY(-20px); }
-            60% { transform: translateY(-10px); }
+            40% { transform: translateY(-15px); }
+            60% { transform: translateY(-7px); }
         }
 
         .cta-box {
             background: rgba(255, 126, 95, 0.1);
-            padding: 20px;
-            border-radius: 15px;
+            padding: 15px;
+            border-radius: 12px;
             border: 2px dashed var(--accent);
-            margin-top: 20px;
+            margin-top: 15px;
             color: var(--primary);
             font-weight: bold;
+            font-size: 15px;
         }
     </style>
 </head>
@@ -243,18 +266,28 @@
 
     <div class="slider-container">
         
-        <!-- Slide 1: Welcome with your image as background -->
-        <div class="slide slide-bg-image active" id="slide1">
+        <!-- Slide 1: New First Page with Logo & 11th Grade Title -->
+        <div class="slide bg-gradient active" id="slide1">
             <div class="slide-content">
-                <i class="fas fa-handshake welcome-icon"></i>
-                <h1>Хүүхдийнхээ төлөө<br>ХАМТДАА</h1>
-                <p>Эрхэм эцэг эх, асран хамгаалагч та бүхнийг сургуулийн нэгдсэн хуралд хүндэтгэн урьж байна.</p>
+                <img src="logo.jpg" alt="Сургуулийн лого" class="logo-img">
+                <h2 class="subtitle">Сэлэнгэ аймаг Мандал сум 4-р сургууль</h2>
+                <h1>11-р ангийн эцэг эх, асран хамгаалагчийн уулзалт</h1>
+                <p>Хүүхдийнхээ ирээдүйн төлөө хамтдаа алхацгаая.</p>
             </div>
         </div>
 
-        <!-- Slide 2: Information with new image -->
-        <div class="slide" id="slide2">
-            <div class="image-header" style="background-image: url('548763890_809940934829868_612864519031044213_n.jpg');"></div>
+        <!-- Slide 2: Welcome with background image (553296844...) -->
+        <div class="slide slide-bg-image" id="slide2">
+            <div class="slide-content">
+                <i class="fas fa-handshake welcome-icon"></i>
+                <h1>Хүүхдийнхээ төлөө<br>ХАМТДАА</h1>
+                <p>Эрхэм эцэг эх, асран хамгаалагч та бүхнийг 11-р ангийн нэгдсэн хуралд хүндэтгэн урьж байна.</p>
+            </div>
+        </div>
+
+        <!-- Slide 3: Information with Image 1 (542833691...) -->
+        <div class="slide" id="slide3">
+            <div class="image-header" style="background-image: url('542833691_2874839172702000_3591516506040930727_n.jpg');"></div>
             <div class="info-body">
                 <h2>Хэзээ, Хаана?</h2>
                 <div class="details-box" style="text-align: left;">
@@ -262,29 +295,29 @@
                     <div><i class="far fa-clock"></i> 18:00 цагаас</div>
                     <div><i class="fas fa-map-marker-alt"></i> Сургуулийн урлаг заал</div>
                 </div>
-                <p style="font-size: 14px; color: #7f8c8d; margin-top: 15px;">
+                <p style="font-size: 13px; color: #7f8c8d; margin-top: 10px;">
                     Таныг цагтаа хүрэлцэн ирнэ гэдэгт итгэлтэй байна.
                 </p>
             </div>
         </div>
 
-        <!-- Slide 3: Vision & Management -->
-        <div class="slide" id="slide3">
-            <div class="image-header" style="background-image: url('https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=800&q=80');"></div>
+        <!-- Slide 4: Vision & Management with Image 2 (548763890...) -->
+        <div class="slide" id="slide4">
+            <div class="image-header" style="background-image: url('548763890_809940934829868_612864519031044213_n.jpg');"></div>
             <div class="info-body">
                 <h2>Шинэ зорилго, менежмент</h2>
-                <p style="text-align: justify; font-size: 14.5px; line-height: 1.6;">
-                    Манай сургууль алсын хараандаа тулгуурласан шинэлэг менежментийг хэрэгжүүлж байна. Хүүхдийнхээ ирээдүйн зорилгын төлөө сургууль болон эцэг эхчүүд <strong>НЭГ БАГ</strong> болон ажиллах нь хамгийн чухал юм.
+                <p style="text-align: justify; font-size: 14px; line-height: 1.5;">
+                    Манай сургууль алсын хараандаа тулгуурласан шинэлэг менежментийг хэрэгжүүлж байна. 11-р ангийн сурагчдынхаа ирээдүйн зорилгын төлөө сургууль болон эцэг эхчүүд <strong>НЭГ БАГ</strong> болон ажиллах нь хамгийн чухал юм.
                 </p>
             </div>
         </div>
 
-        <!-- Slide 4: Call to Action -->
-        <div class="slide bg-gradient" id="slide4">
+        <!-- Slide 5: Call to Action -->
+        <div class="slide bg-gradient" id="slide5">
             <div class="slide-content">
-                <i class="fas fa-users welcome-icon" style="color: #fff; font-size: 50px;"></i>
+                <i class="fas fa-users welcome-icon" style="color: #fff; font-size: 45px;"></i>
                 <h2>Таны оролцоо<br>хамгийн чухал!</h2>
-                <p style="margin-top: 15px;">Бид тантай нээлттэй ярилцаж, төлөвлөгөөгөө хуваалцахыг тэсэн ядан хүлээж байна.</p>
+                <p style="margin-top: 10px;">Бид тантай нээлттэй ярилцаж, төлөвлөгөөгөө хуваалцахыг тэсэн ядан хүлээж байна.</p>
                 
                 <div class="cta-box">
                     Хуралдаа заавал хүрэлцэн ирээрэй!
@@ -299,6 +332,7 @@
                 <div class="dot" onclick="goToSlide(1)"></div>
                 <div class="dot" onclick="goToSlide(2)"></div>
                 <div class="dot" onclick="goToSlide(3)"></div>
+                <div class="dot" onclick="goToSlide(4)"></div>
             </div>
             <button class="nav-btn" id="nextBtn" onclick="nextSlide()">Цааш нь ➔</button>
         </div>
